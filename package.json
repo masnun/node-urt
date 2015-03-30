@@ -1,0 +1,18 @@
+{
+  "name": "urt",
+  "version": "0.0.3",
+  "description": "Urban Terror Server Monitor",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abu Ashraf Masnun",
+  "license": "ISC",
+  "dependencies": {
+    "blessed": "0.0.51",
+    "blessed-contrib": "^1.0.14"
+  },
+  "bin": {
+    "urt": "main.js"
+  }
+}
