@@ -1,12 +1,15 @@
 ## Urban Terror Server Monitor
 Yet another CLI tool for monitoring UrT Servers
 
+<a href="https://www.npmjs.com/package/urt"><img src="https://nodei.co/npm/urt.png?mini=true"></a>
+
+
 
 ### Why another tool?
 
 This one uses the awesome "blessed" and "blessed-contrib" nodejs packages to build an interactive UI on the command line. See the screenshot. 
 
-<img src="screenshot.png" alt="screenshot" />
+<img src="https://raw.githubusercontent.com/masnun/node-urt/master/screenshot.png" alt="screenshot" />
 
 The list updates automatically at an interval you specify. 
 
