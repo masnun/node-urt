@@ -1,6 +1,6 @@
 {
   "name": "urt",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "preferGlobal": true,
   "description": "Urban Terror Server Monitor",
   "main": "main.js",
