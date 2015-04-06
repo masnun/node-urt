@@ -32,7 +32,7 @@ function setupUI() {
     {
         keys: true
         , fg: 'green'
-        , columnSpacing: 16
+        , columnSpacing: [40, 10, 10]
         , xLabelPadding: 3
         , xPadding: 5
         , label: "Players List"
