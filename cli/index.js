@@ -3,7 +3,7 @@
 const co = require("co");
 const blessed = require('blessed');
 const contrib = require('blessed-contrib');
-const utils = require("./utils");
+const utils = require("./../utils");
 
 var host = 'pub.urtbd.com';
 var port = 27960;
@@ -44,8 +44,8 @@ function setupUI() {
     // Load initial Table layout
     var table = grid.get(0, 0);
     table.setData({
-        headers: ['Player', 'Ping', 'Score']
-        , data: []
+        headers: ['Player', 'Ping', 'Score'],
+        data: []
     });
 
     // Set quit options

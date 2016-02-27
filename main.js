@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var monitor = require("./monitor");
+var monitor = require("./cli");
 
 
 /*
