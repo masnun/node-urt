@@ -17,7 +17,6 @@ var parts = server.split(":");
 var host = parts[0];
 var port = parts[1];
 
-
 monitor.configure({
     'host': host,
     'port': port,

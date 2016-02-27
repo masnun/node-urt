@@ -1,17 +1,15 @@
-var dgram = require('dgram');
-var blessed = require('blessed');
-var contrib = require('blessed-contrib');
+'use strict';
 
+const co = require("co");
+const blessed = require('blessed');
+const contrib = require('blessed-contrib');
+const utils = require("./utils");
 
-var client = dgram.createSocket('udp4');
-var host = 'urtbd.com';
-var port = 1111;
+var host = 'pub.urtbd.com';
+var port = 27960;
 
 var screen, grid;
-
-
 var duration = 1000;
-
 
 function configure(configs) {
 
@@ -30,12 +28,12 @@ function setupUI() {
     // Table UI
     var tableOptions =
     {
-        keys: true
-        , fg: 'green'
-        , columnSpacing: [40, 10, 10]
-        , xLabelPadding: 3
-        , xPadding: 5
-        , label: "Players List"
+        keys: true,
+        fg: 'green',
+        columnSpacing: [40, 10, 10],
+        xLabelPadding: 3,
+        xPadding: 5,
+        label: "Players List"
 
     };
 
@@ -60,53 +58,37 @@ function setupUI() {
 
 }
 
+function * updateUI() {
+
+    try {
+        const players = yield utils.getServerResponse(host, port);
+
+        let table = grid.get(0, 0);
+        table.setData({
+            headers: ['Player', 'Ping', 'Score'],
+            data: players
+        });
+
+        // Re-render the screen
+        screen.render();
+
+    } catch (e) {
+        console.log("Error: " + e);
+    }
+
+}
+
 
 function start() {
 
     // Load the UI
     setupUI();
 
-    // Query string for URT
-    var data = new Buffer("\377\377\377\377getstatus", 'binary');
-
     // Set periodic update
     setInterval(function () {
-        client.send(data, 0, data.length, port, host);
+        co(updateUI());
     }, duration);
 
-    // Handle updates - read UDP message and parse the data
-    // Then render the layout
-    client.on('message', function (message) {
-
-        // Parse the message, create data structure
-        var response = message.toString();
-        var lines = response.split("\n");
-        var players = [];
-        for (var i = 2; i < lines.length; i++) {
-            var line = lines[i];
-            if (line.trim().length > 0) {
-                var playerData = line.split(" ");
-
-                players.push([
-                    playerData[2].replace('"', '').replace('"', ''),
-                    playerData[1],
-                    playerData[0]
-                ])
-            }
-
-        }
-
-        // Add the data to table
-        var table = grid.get(0, 0);
-        table.setData({
-            headers: ['Player', 'Ping', 'Score']
-            , data: players
-        });
-
-        // Re-render the screen
-        screen.render();
-
-    });
 
 }
 
