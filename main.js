@@ -10,7 +10,7 @@ var monitor = require("./cli");
  */
 
 
-var server = process.argv[2] || "urtbd.com:1111";
+var server = process.argv[2] || "pub.urtbd.com:27960";
 var duration = process.argv[3] || 1000;
 
 var parts = server.split(":");
